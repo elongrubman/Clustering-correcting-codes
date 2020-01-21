@@ -1,11 +1,12 @@
 //
-// Created by amitw on 22/11/2019.
+// Created by  Elon Grubman on 21/01/2020.
 //
 
-#ifndef CLUSTERING_CORRECTING_CODES_PROJECT_STRAND_H
-#define CLUSTERING_CORRECTING_CODES_PROJECT_STRAND_H
-#include <iostream>
-#include <vector>
+#ifndef CLUSTERING_CORRECTING_CODES_STRAND_H
+#define CLUSTERING_CORRECTING_CODES_STRAND_H
+
+
+#include "includes.h"
 
 using namespace std;
 
@@ -15,20 +16,20 @@ using namespace std;
  * index - representing the index part of the strand.
  */
 class strand {
-    vector<int> index;
+    int index;
     vector<int> data;
 public:
-    strand(const vector<int> &initial_index, const vector<int> &initial_data): index(initial_index), data(initial_data){};
+    strand(int initial_index, const vector<int> &initial_data): index(initial_index), data(initial_data){};
 
-     vector<int>& getIndex()  {
+    int getIndex()  {
         return index;
     }
 
-     vector<int>& getData()  {
-         return data;
+    vector<int>& getData()  {
+        return data;
     }
 
-    void setIndex(const vector<int> &index) {
+    void setIndex(int &index) {
         strand::index = index;
     }
 
@@ -37,7 +38,5 @@ public:
     }
 
 
-};
 
-
-#endif //CLUSTERING_CORRECTING_CODES_PROJECT_STRAND_H
+#endif //CLUSTERING_CORRECTING_CODES_STRAND_H
