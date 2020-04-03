@@ -1,20 +1,17 @@
 //
-// Created by  Elon Grubman on 21/01/2020.
+// Created by amitw on 18/01/2020.
 //
 
-#ifndef CLUSTERING_CORRECTING_CODES_ENCODED_STRAND_BINARY_H
-#define CLUSTERING_CORRECTING_CODES_ENCODED_STRAND_BINARY_H
-
-#include "includes.h"
-
-
-class encoded_strand_binary{
+#ifndef CLUSTERING_CORRECTING_CODES_PROJECT_ENCODED_STRAND_BINARY_H
+#define CLUSTERING_CORRECTING_CODES_PROJECT_ENCODED_STRAND_BINARY_H
+#include "strand.h"
+class encoded_strand_binary {
     vector<int> encoded_data;
     bool brute_force;
 public:
     encoded_strand_binary(vector<int> data, bool brute): encoded_data(data), brute_force(brute){};
 
-    vector<int> get_encoded_data(){
+    vector<int>& get_encoded_data(){
         return encoded_data;
     }
 
@@ -44,7 +41,7 @@ public:
             vector<int>& first_LogM_bits,
             int index_length){
 
-        first_LogM_bits.insert(first_LogM_bits.begin(), encoded_data.begin(), encoded_data.begin() + index_length);
+            first_LogM_bits.insert(first_LogM_bits.begin(), encoded_data.begin(), encoded_data.begin() + index_length);
     }
     /*!
      * sets the given vector as the first logM bits of the encoded data
@@ -54,6 +51,17 @@ public:
         for(int i = 0; i < first_logM_bits.size(); i++){
             encoded_data[i] = first_logM_bits[i];
         }
+    }
+    void insertLastBit(){
+        encoded_data.push_back(1);
+    }
+
+    /*!
+     * set new encoded data
+     * @param new_encoded_data - new encoded data to be set.
+     */
+    void setEncodedData(vector<int> new_encoded_data){
+        encoded_data = new_encoded_data;
     }
 
     /*!
@@ -66,16 +74,83 @@ public:
         getFirstLogMBits(first_LogM_bits, index_length);
         return binaryToDec(first_LogM_bits);
     }
-    /*!
-     * function get extract the delta1 part out of the encoded data, its position depends
-     * wether we encoded w_l with brute force or not.
-     * @param delta_1_from_encoded_data - the output delta1 in binary.
-     */
-    void getDelta1FromEncodedData(vector<int>& delta_1_from_encoded_data){
-        /// in case brute force == true, w_l = 3t + 2*logN
-        if(brute_force){
 
+
+
+
+/*!
+ * function for calculating for a given encoded strand its w_l size, it depends if he was encoded in brute force manner
+ * or not, 3t * 2ceil(log(N+1)) for brute, and t * ceil(log(N+1)) without brute force.
+ * we will calculate N w.r.t the given e,t and M . (N = | { x is a binary number | dH(x, index) <= e} | )
+ * @param M - number of strands in the system
+ * @param e - index distance constraint
+ * @param t - data distance constraint
+ * @param index - index of the strand we're calculating its w_l size.
+ * @param distanceMetric - the distance metric we're using
+ * @return integer representing w_l's size.
+ */
+    int calculate_wl_size(
+            int M,
+            int e,
+            int t,
+            int index,
+            int (*distanceMetric)(vector<int>, vector<int>)){
+
+        // calculate N
+        int index_length = ceil(log2(M));
+        vector<int> index_binary_representation;
+        decToBinaryWithSize(index, index_binary_representation, index_length);
+        set<vector<int>> relevant_indexes;
+        set<vector<int>> output_indexes;
+        set<vector<int>> union_of_all;
+        distanceByOne(index_binary_representation, relevant_indexes, distanceMetric);
+        union_of_all = relevant_indexes;
+        int count_till_e = 1;
+        count_till_e++;
+        while(count_till_e <= e){
+            distanceByOneFromSet(relevant_indexes, output_indexes, distanceMetric);
+            relevant_indexes = output_indexes;
+            union_of_all.insert(output_indexes.begin(), output_indexes.end());
+            count_till_e++;
         }
+        for(auto it = union_of_all.begin(); it != union_of_all.end(); it++){
+            if(*it == index_binary_representation){
+                union_of_all.erase(it);
+            }
+        }
+        int N = union_of_all.size();
+        // brute force
+        if(brute_force){
+            return 3 * t +  2 * ceil(log2(N + 1));
+        }
+        // no brute force
+        else return t * ceil(log2(N + 1));
+
+    }
+
+    /*!
+    * function for extracting delta1 part from the encoded strand (delta_1 size = e * ceil(log(log(M)))
+    * @param delta_1_from_encoded_data - the output delta1 part
+    * @param M - number of strands in the system
+    * @param e - index distance constraint
+    * @param t - data distance constraint
+    * @param index - index of the strand we're calculating its w_l size.
+    * @param distanceMetric - the distance metric we're using
+     */
+    void getDelta1FromEncodedData(
+            vector<int>& delta_1_from_encoded_data,
+            int M,
+            int e,
+            int t,
+            int index,
+            int (*distanceMetric)(vector<int>, vector<int>)){
+        /// in case brute force == true, w_l = 3t + 2*log(N+1)
+        int w_l_size = calculate_wl_size(M, e, t, index, distanceMetric);
+        int index_length = ceil(log2(M));
+        int delta_1_size = ceil(log2(index_length)) * e;
+        vector<int> output{encoded_data.begin() + w_l_size + index_length,
+                           encoded_data.begin() + w_l_size + index_length + delta_1_size};
+        delta_1_from_encoded_data = output;
     }
     /*!
      * function that recives delta 1 in binary representation, and convert it to a vector of positions as ints
@@ -97,15 +172,30 @@ public:
     }
 
     /*!
- * function get extract the delta2 part out of the encoded data, its position depends
- * wether we encoded w_l with brute force or not.
- * @param delta_1_from_encoded_data - the output delta1 in binary.
- */
-    void getDelta2FromEncodedData(vector<int>& delta_2_from_encoded_data){
-        /// in case brute force == true, w_l = 3t + 2*logN
-        if(brute_force){
+      * function for extracting delta2 part from the encoded strand (delta_1 size = (t-1) * ceil(log(L - M)))
+      * @param delta_2_from_encoded_data - the output delta1 part
+      * @param M - number of strands in the system
+      * @param e - index distance constraint
+      * @param t - data distance constraint
+      * @param index - index of the strand we're calculating its w_l size.
+      * @param distanceMetric - the distance metric we're using
+       */
+    void getDelta2FromEncodedData(
+            vector<int>& delta_2_from_encoded_data,
+            int M,
+            int e,
+            int t,
+            int index,
+            int (*distanceMetric)(vector<int>, vector<int>)){
 
-        }
+        /// in case brute force == true, w_l = 3t + 2*logN
+        int w_l_size = calculate_wl_size(M, e, t, index, distanceMetric);
+        int index_length = ceil(log2(M));
+        int delta_1_size = ceil(log2(index_length)) * e;
+        int delta_2_size = ceil(log2(encoded_data.size())) * (t - 1);
+        vector<int> output{encoded_data.begin() + w_l_size + index_length + delta_1_size
+                           ,encoded_data.begin() + w_l_size + index_length + delta_1_size + delta_2_size};
+        delta_2_from_encoded_data = output;
     }
 
     /*!
@@ -126,7 +216,7 @@ public:
         for(int i = 0; i < delta2.size(); i += position_length){
             vector<int> curr_binary_position{delta2.begin() + i, delta2.begin() + i + position_length};
             int curr_position = binaryToDec(curr_binary_position);
-            /// unordered delta2 = padding
+            /// unordered delta2 = identical
             if(curr_position < last_position){
                 positions_as_ints.clear();
                 return;
@@ -136,8 +226,12 @@ public:
         }
     }
 
+    bool getIfBruteForce(){
+        return brute_force;
+    }
+
+
 };
 
 
-
-#endif //CLUSTERING_CORRECTING_CODES_ENCODED_STRAND_BINARY_H
+#endif //CLUSTERING_CORRECTING_CODES_PROJECT_ENCODED_STRAND_BINARY_H

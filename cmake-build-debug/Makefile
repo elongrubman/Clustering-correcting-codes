@@ -48,10 +48,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/Users/elongrubman/CLionProjects/clustering correcting codes"
+CMAKE_SOURCE_DIR = /Users/elongrubman/clustering-correcting-codes
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Users/elongrubman/CLionProjects/clustering correcting codes/cmake-build-debug"
+CMAKE_BINARY_DIR = /Users/elongrubman/clustering-correcting-codes/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/elongrubman/CLionProjects/clustering correcting codes/cmake-build-debug/CMakeFiles" "/Users/elongrubman/CLionProjects/clustering correcting codes/cmake-build-debug/CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/elongrubman/clustering-correcting-codes/cmake-build-debug/CMakeFiles /Users/elongrubman/clustering-correcting-codes/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/elongrubman/CLionProjects/clustering correcting codes/cmake-build-debug/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/elongrubman/clustering-correcting-codes/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named clustering_correcting_codes
+# Target rules for targets named clustering_correcting_codes_project
 
 # Build rule for target.
-clustering_correcting_codes: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 clustering_correcting_codes
-.PHONY : clustering_correcting_codes
+clustering_correcting_codes_project: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 clustering_correcting_codes_project
+.PHONY : clustering_correcting_codes_project
 
 # fast build rule for target.
-clustering_correcting_codes/fast:
-	$(MAKE) -f CMakeFiles/clustering_correcting_codes.dir/build.make CMakeFiles/clustering_correcting_codes.dir/build
-.PHONY : clustering_correcting_codes/fast
+clustering_correcting_codes_project/fast:
+	$(MAKE) -f CMakeFiles/clustering_correcting_codes_project.dir/build.make CMakeFiles/clustering_correcting_codes_project.dir/build
+.PHONY : clustering_correcting_codes_project/fast
 
 main.o: main.cpp.o
 
@@ -129,7 +129,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/clustering_correcting_codes.dir/build.make CMakeFiles/clustering_correcting_codes.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/clustering_correcting_codes_project.dir/build.make CMakeFiles/clustering_correcting_codes_project.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -138,7 +138,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/clustering_correcting_codes.dir/build.make CMakeFiles/clustering_correcting_codes.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/clustering_correcting_codes_project.dir/build.make CMakeFiles/clustering_correcting_codes_project.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -147,7 +147,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/clustering_correcting_codes.dir/build.make CMakeFiles/clustering_correcting_codes.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/clustering_correcting_codes_project.dir/build.make CMakeFiles/clustering_correcting_codes_project.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -158,7 +158,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... clustering_correcting_codes"
+	@echo "... clustering_correcting_codes_project"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

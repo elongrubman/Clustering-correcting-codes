@@ -1,4 +1,4 @@
-# Install script for directory: /Users/elongrubman/CLionProjects/clustering correcting codes
+# Install script for directory: /Users/elongrubman/clustering-correcting-codes
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/elongrubman/CLionProjects/clustering correcting codes/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/elongrubman/clustering-correcting-codes/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -1,3 +1,3 @@
-/Users/elongrubman/CLionProjects/clustering correcting codes/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/elongrubman/CLionProjects/clustering correcting codes/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/elongrubman/CLionProjects/clustering correcting codes/cmake-build-debug/CMakeFiles/clustering_correcting_codes.dir
+/Users/elongrubman/clustering-correcting-codes/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/elongrubman/clustering-correcting-codes/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/elongrubman/clustering-correcting-codes/cmake-build-debug/CMakeFiles/clustering_correcting_codes_project.dir

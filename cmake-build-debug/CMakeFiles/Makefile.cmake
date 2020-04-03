@@ -52,5 +52,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/clustering_correcting_codes.dir/DependInfo.cmake"
+  "CMakeFiles/clustering_correcting_codes_project.dir/DependInfo.cmake"
   )

@@ -1,12 +1,10 @@
 //
-// Created by  Elon Grubman on 21/01/2020.
+// Created by amitw on 18/01/2020.
 //
 
-#ifndef CLUSTERING_CORRECTING_CODES_INCLUDES_H
-#define CLUSTERING_CORRECTING_CODES_INCLUDES_H
-
+#ifndef CLUSTERING_CORRECTING_CODES_PROJECT_INCLUDES_H
+#define CLUSTERING_CORRECTING_CODES_PROJECT_INCLUDES_H
 #include <math.h>
-#include <random>
 #include <algorithm>
 #include <tuple>
 #include <set>
@@ -17,8 +15,7 @@
 #include <vector>
 #include <fstream>
 #include <string>
-#include <utility>
-
+//#endif //CLUSTERING_CORRECTING_CODES_PROJECT_INCLUDES_H
 
 using namespace std;
 
@@ -40,7 +37,9 @@ int binaryToDec(vector<int> input){
 }
 
 
-int HammingDistance(vector<int> one, vector<int> two){
+int HammingDistance(
+        vector<int> one,
+        vector<int> two){
 
     if(one.size() != two.size()){
         cout << "Hamming distance is defined only for vectors from the same size" << endl;
@@ -114,9 +113,9 @@ void convertCharVecToIntVec(
         vector<char>& char_vec,
         vector<int>& int_vec){
 
-    for(int i = 0; i < char_vec.size(); i++){
-        int_vec.push_back(char_vec[i] - '0');
-    }
+        for(int i = 0; i < char_vec.size(); i++){
+            int_vec.push_back(char_vec[i] - '0');
+        }
 }
 
 /*!
@@ -134,4 +133,53 @@ void convertIntVecToCharVec(
 }
 
 
-#endif //CLUSTERING_CORRECTING_CODES_INCLUDES_H
+/*!
+ * this function is calculating all the binary numbers that are far from a given number by one in a given distance
+ * metric (hamming or edit)
+ * @param num - the given number
+ * @param numbers - the output set of all the numbers that are far in one bit.
+ * @param distanceMetric - pointer to the distance function
+ */
+void distanceByOne(
+        vector<int> num,
+        set<vector<int>>& numbers,
+        int (*distanceMetric)(vector<int>, vector<int>)){
+
+    for(int i = 0; i < num.size(); i++){
+        vector<int> index_j;
+        index_j = num;
+        if(num[i] == 0){
+            index_j[i] = 1;
+        }
+        else{
+            index_j[i] = 0;
+        }
+        numbers.insert(index_j);
+    }
+//    num.insert(num.begin(), 1);
+//    numbers.insert(num);
+}
+
+
+
+/*!
+ * this function will helps us calculating S(e,i),  for each number in the given input_number set
+ * we're calculating all the binary numbers that are far from him in one bit (hamming distance) and
+ * inserting it into the output_numbers set (which eventually will contain all the numbers).
+ * @param numbers - the set of the input binary numbers
+ * @param output_numbers - the output set containing all the numbers that are far in one bit from a number
+ * in the input set.
+ * @param distanceMetric - pointer to the distance function
+
+ */
+void distanceByOneFromSet(
+        set<vector<int>>& input_numbers,
+        set<vector<int>>& output_numbers,
+        int (*distanceMetric)(vector<int>, vector<int>)){
+
+    for(auto it = input_numbers.begin(); it != input_numbers.end(); it++){
+        distanceByOne(*it, output_numbers, distanceMetric);
+    }
+}
+
+#endif

@@ -1,10 +1,9 @@
 //
-// Created by  Elon Grubman on 21/01/2020.
+// Created by amitw on 22/11/2019.
 //
 
-#ifndef CLUSTERING_CORRECTING_CODES_STRAND_H
-#define CLUSTERING_CORRECTING_CODES_STRAND_H
-
+#ifndef CLUSTERING_CORRECTING_CODES_PROJECT_STRAND_H
+#define CLUSTERING_CORRECTING_CODES_PROJECT_STRAND_H
 
 #include "includes.h"
 
@@ -21,12 +20,12 @@ class strand {
 public:
     strand(int initial_index, const vector<int> &initial_data): index(initial_index), data(initial_data){};
 
-    int getIndex()  {
+     int getIndex()  {
         return index;
     }
 
-    vector<int>& getData()  {
-        return data;
+     vector<int>& getData()  {
+         return data;
     }
 
     void setIndex(int &index) {
@@ -38,5 +37,7 @@ public:
     }
 
 
+};
 
-#endif //CLUSTERING_CORRECTING_CODES_STRAND_H
+
+#endif //CLUSTERING_CORRECTING_CODES_PROJECT_STRAND_H

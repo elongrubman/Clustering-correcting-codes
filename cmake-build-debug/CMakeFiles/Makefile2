@@ -44,21 +44,21 @@ RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/Users/elongrubman/CLionProjects/clustering correcting codes"
+CMAKE_SOURCE_DIR = /Users/elongrubman/clustering-correcting-codes
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Users/elongrubman/CLionProjects/clustering correcting codes/cmake-build-debug"
+CMAKE_BINARY_DIR = /Users/elongrubman/clustering-correcting-codes/cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/clustering_correcting_codes.dir/all
+all: CMakeFiles/clustering_correcting_codes_project.dir/all
 
 .PHONY : all
 
 # The main recursive "clean" target.
-clean: CMakeFiles/clustering_correcting_codes.dir/clean
+clean: CMakeFiles/clustering_correcting_codes_project.dir/clean
 
 .PHONY : clean
 
@@ -68,31 +68,31 @@ preinstall:
 .PHONY : preinstall
 
 #=============================================================================
-# Target rules for target CMakeFiles/clustering_correcting_codes.dir
+# Target rules for target CMakeFiles/clustering_correcting_codes_project.dir
 
 # All Build rule for target.
-CMakeFiles/clustering_correcting_codes.dir/all:
-	$(MAKE) -f CMakeFiles/clustering_correcting_codes.dir/build.make CMakeFiles/clustering_correcting_codes.dir/depend
-	$(MAKE) -f CMakeFiles/clustering_correcting_codes.dir/build.make CMakeFiles/clustering_correcting_codes.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/Users/elongrubman/CLionProjects/clustering correcting codes/cmake-build-debug/CMakeFiles" --progress-num=1,2 "Built target clustering_correcting_codes"
-.PHONY : CMakeFiles/clustering_correcting_codes.dir/all
+CMakeFiles/clustering_correcting_codes_project.dir/all:
+	$(MAKE) -f CMakeFiles/clustering_correcting_codes_project.dir/build.make CMakeFiles/clustering_correcting_codes_project.dir/depend
+	$(MAKE) -f CMakeFiles/clustering_correcting_codes_project.dir/build.make CMakeFiles/clustering_correcting_codes_project.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/elongrubman/clustering-correcting-codes/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target clustering_correcting_codes_project"
+.PHONY : CMakeFiles/clustering_correcting_codes_project.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/clustering_correcting_codes.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/elongrubman/CLionProjects/clustering correcting codes/cmake-build-debug/CMakeFiles" 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/clustering_correcting_codes.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/elongrubman/CLionProjects/clustering correcting codes/cmake-build-debug/CMakeFiles" 0
-.PHONY : CMakeFiles/clustering_correcting_codes.dir/rule
+CMakeFiles/clustering_correcting_codes_project.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/elongrubman/clustering-correcting-codes/cmake-build-debug/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/clustering_correcting_codes_project.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/elongrubman/clustering-correcting-codes/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/clustering_correcting_codes_project.dir/rule
 
 # Convenience name for target.
-clustering_correcting_codes: CMakeFiles/clustering_correcting_codes.dir/rule
+clustering_correcting_codes_project: CMakeFiles/clustering_correcting_codes_project.dir/rule
 
-.PHONY : clustering_correcting_codes
+.PHONY : clustering_correcting_codes_project
 
 # clean rule for target.
-CMakeFiles/clustering_correcting_codes.dir/clean:
-	$(MAKE) -f CMakeFiles/clustering_correcting_codes.dir/build.make CMakeFiles/clustering_correcting_codes.dir/clean
-.PHONY : CMakeFiles/clustering_correcting_codes.dir/clean
+CMakeFiles/clustering_correcting_codes_project.dir/clean:
+	$(MAKE) -f CMakeFiles/clustering_correcting_codes_project.dir/build.make CMakeFiles/clustering_correcting_codes_project.dir/clean
+.PHONY : CMakeFiles/clustering_correcting_codes_project.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
